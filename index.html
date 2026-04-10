@@ -60,6 +60,91 @@
     /* Ensure images are crisp and visible */
     .bg-image-fade { position: relative; }
     .bg-image-fade::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.15); pointer-events: none; }
+    /* Trust Bar Sliding Styles – add this to your CSS file or <style> block */
+.trust-slider-section {
+  background-color: #F0F6FA;   /* bg-warm */
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 2rem 0;             /* py-8 */
+  overflow-x: hidden;
+}
+
+.trust-slider-container {
+  max-width: 80rem;            /* max-w-7xl */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;        /* px-6 */
+  padding-right: 1.5rem;
+}
+
+.trust-slider-wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.trust-slider-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;                   /* gap-8 on mobile, scales up */
+  animation: slideRightToLeft 28s linear infinite;
+  will-change: transform;
+}
+
+/* pause on hover for better usability */
+.trust-slider-wrapper:hover .trust-slider-track {
+  animation-play-state: paused;
+}
+
+.trust-label {
+  font-size: 0.75rem;          /* text-xs */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;      /* tracking-wider */
+  color: #6b7280;              /* text-gray-500 */
+}
+
+.trust-item {
+  font-size: 0.875rem;         /* text-sm */
+  font-weight: 700;
+  color: #6b7280;              /* text-gray-500 */
+}
+
+/* keyframes: moves from 0% to -50% (half the track width) for seamless loop */
+@keyframes slideRightToLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* responsive adjustments */
+@media (min-width: 768px) {
+  .trust-slider-track {
+    gap: 3rem;                 /* md:gap-12 */
+  }
+}
+
+@media (max-width: 640px) {
+  .trust-slider-track {
+    gap: 1.5rem;
+  }
+  .trust-item {
+    font-size: 0.75rem;
+  }
+  .trust-label {
+    font-size: 0.7rem;
+  }
+}
+
+/* reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .trust-slider-track {
+    animation: none;
+    transform: translateX(0);
+  }
+}
   </style>
 </head>
 <body class="bg-white text-gray-700 antialiased">
@@ -187,7 +272,7 @@
     <!-- Hero Section with enhanced image visibility -->
     <section id="home" class="relative min-h-screen flex items-center">
       <div class="absolute inset-0 bg-image-fade">
-        <img src="assets/poolpo.jpg" alt="Luxury pool backyard Houston" class="w-full h-full object-cover" loading="eager" />
+        <img src="assets/poolia.jpg" alt="Luxury pool backyard Houston" class="w-full h-full object-cover" loading="eager" />
         <div class="hero-overlay absolute inset-0"></div>
       </div>
       <div class="relative z-10 max-w-7xl mx-auto px-5 md:px-6 py-16 md:py-24 w-full">
@@ -223,8 +308,35 @@
       <div class="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce"><a href="#about" class="text-white/70 hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg></a></div>
     </section>
 
-    <!-- Trust Bar -->
-    <section class="bg-warm py-8 border-y border-gray-100"><div class="max-w-7xl mx-auto px-6"><div class="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-70"><span class="text-xs font-semibold uppercase tracking-wider text-gray-500">Proud Member</span><span class="text-sm font-bold text-gray-500">Master Pools Guild</span><span class="text-sm font-bold text-gray-500">APSAP Certified</span><span class="text-sm font-bold text-gray-500">Pentair Partner</span><span class="text-sm font-bold text-gray-500">Houston HBA</span></div></div></section>
+    <!-- Trust Bar – sliding from right to left -->
+<section class="trust-slider-section">
+  <div class="trust-slider-container">
+    <div class="trust-slider-wrapper">
+      <div class="trust-slider-track">
+        <!-- first set -->
+        <span class="trust-label">Proud Member</span>
+        <span class="trust-item">Master Pools Guild</span>
+        <span class="trust-item">APSAP Certified</span>
+        <span class="trust-item">Pentair Partner</span>
+        <span class="trust-item">Houston HBA</span>
+
+        <!-- duplicate set for seamless infinite loop -->
+        <span class="trust-label">Proud Member</span>
+        <span class="trust-item">Master Pools Guild</span>
+        <span class="trust-item">APSAP Certified</span>
+        <span class="trust-item">Pentair Partner</span>
+        <span class="trust-item">Houston HBA</span>
+
+        <!-- third set (optional, ensures smoothness on extra‑wide screens) -->
+        <span class="trust-label">Proud Member</span>
+        <span class="trust-item">Master Pools Guild</span>
+        <span class="trust-item">APSAP Certified</span>
+        <span class="trust-item">Pentair Partner</span>
+        <span class="trust-item">Houston HBA</span>
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- About Section -->
     <section id="about" class="py-20 md:py-28 bg-white"><div class="max-w-7xl mx-auto px-6"><div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"><div class="reveal relative"><img src="assets/poolee.jpg" alt="Pool construction team" class="rounded-2xl shadow-xl w-full h-[380px] md:h-[500px] object-cover"><div class="absolute -bottom-6 -right-4 md:-bottom-8 md:-right-8 bg-primary text-white p-5 md:p-6 rounded-2xl shadow-xl"><div class="text-3xl md:text-4xl font-bold text-secondary">20+</div><div class="text-xs md:text-sm mt-1">Years of Excellence</div></div></div><div class="reveal"><span class="text-secondary font-semibold text-sm uppercase tracking-widest">About Adventure Pool</span><h2 class="font-heading text-3xl md:text-5xl font-bold text-primary mt-2 mb-5 leading-tight">Houston's Trusted <span class="text-secondary">Pool Craftsmanship</span></h2><div class="w-16 h-1 bg-secondary rounded mb-6"></div><p class="text-gray-600 leading-relaxed mb-5 text-base md:text-lg">We're a family-owned Houston pool builder dedicated to creating stunning, functional outdoor spaces. From design to the first splash, we prioritize quality, communication, and your vision.</p><div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8"><div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-secondary"></i><span class="text-sm">Licensed & Insured</span></div><div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-secondary"></i><span class="text-sm">3D Design Consultation</span></div><div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-secondary"></i><span class="text-sm">Lifetime Structural Warranty</span></div><div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-secondary"></i><span class="text-sm">Full Project Management</span></div></div><a href="#contact" class="inline-flex items-center gap-2 bg-primary hover:bg-accent text-white font-semibold px-7 py-3.5 rounded-xl transition shadow-md">Learn More About Us <i data-lucide="arrow-right" class="w-5 h-5"></i></a></div></div></div></section>
